@@ -1,40 +1,46 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithPopup,
+  // signInWithPopup,
+  signInWithEmailAndPassword
 } from "firebase/auth";
 
-import app from "../firebase";
+import { auth } from "../firebase"
 
 function SignUp() {
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSignUps = (e) => {
+  const handleSignUps = async (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      navigate("/dashboard");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/dashboard");
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   const handleGoogleSignUps = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // signInWithPopup(auth, provider)
+    //   .then((result) => {
+    //     console.log(result);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
   return (
     <>
@@ -83,6 +89,13 @@ function SignUp() {
             />
             <button className="py-2 px-4 rounded-md text-md bg-emerald-600 text-white cursor-pointer">
               Sign in
+            </button>
+
+            <button
+              onClick={handleLogin}
+              className="border border-slate-300 text-slate-700 px-4 py-2 rounded-md cursor-pointer"
+            >
+              Login
             </button>
           </form>
         </div>
