@@ -65,7 +65,7 @@ function SignUp() {
             Continue with Google
           </button>
 
-          <span className="w-full text-md border-b border-1 border-[#eee]"></span>
+          <span className="w-full text-md border-b border-[#eee]"></span>
           <form
             action=""
             className="form flex flex-col gap-3"
