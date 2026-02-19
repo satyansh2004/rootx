@@ -6,7 +6,7 @@ function GeneratedDocsPreview() {
   return (
     <>
       <div className="flex flex-col">
-        <div className="w-80 bg-white border-l border-stone-200 p-6 overflow-y-auto hidden lg:block">
+        <div className="w-80 bg-white border-l border-stone-200 p-6 overflow-y-auto hidden lg:block h-full">
           <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-emerald-800">
             <Wheat size={20} /> AI Analysis
           </h3>
@@ -31,8 +31,8 @@ function GeneratedDocsPreview() {
             </div>
           </div>
         </div>
-        <div className="fixed bottom-0">
-          <button>Dowload</button>
+        <div className="absolute bottom-0 w-80 flex justify-center pt-7 border-t bg-white">
+          <button className="px-6 py-3 bg-emerald-600 text-white rounded-md relative bottom-3 w-[90%] hover:bg-emerald-900 cursor-pointer">Dowload</button>
         </div>
       </div>
     </>
