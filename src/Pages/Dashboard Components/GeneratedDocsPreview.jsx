@@ -27,12 +27,13 @@ function GeneratedDocsPreview() {
               <div className="text-2xl font-bold text-orange-900">24°C</div>
               <p className="text-xs text-orange-600 mt-1">
                 Optimal for Rabi crops
+                Lorem, ipsum dolor. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic aut voluptatum consectetur, veritatis non, ipsa nisi repellendus exercitationem qui delectus consequuntur deleniti labore perspiciatis quisquam ratione minus, accusantium temporibus cum eligendi? Magni, nihil distinctio qui officia placeat molestiae eius inventore id quae quo ipsum in asperiores sapiente quaerat? Eius, repudiandae! Dolore adipisci est aspernatur quam laboriosam deleniti itaque voluptatum odit velit expedita esse, ea, recusandae sint quia iste doloribus porro nostrum unde dicta laborum praesentium! Adipisci quo illo numquam, possimus, iure impedit quas pariatur assumenda itaque fugiat, deleniti distinctio expedita in et ex repudiandae repellendus voluptatum. Odio ad quod alias quidem dignissimos autem culpa illum corporis! Eos corrupti dolor nulla dolorem expedita ratione consectetur quasi! Suscipit dolorum exercitationem dignissimos possimus distinctio ratione facilis fuga cupiditate perferendis et eligendi consequatur similique, dolor illum tenetur excepturi, explicabo iure amet itaque maiores? Amet nisi facilis quae blanditiis! Iure ad accusamus ut, assumenda, soluta magnam inventore laudantium suscipit libero accusantium nisi amet. Iure veniam odit distinctio neque est. Quae similique deserunt beatae totam voluptatibus perspiciatis sapiente fugiat odit. Voluptas eius dolor quas, incidunt optio pariatur non omnis eveniet quasi praesentium, quis exercitationem. Fuga veniam debitis dicta eveniet accusantium molestias quis officiis quidem culpa atque!
               </p>
             </div>
           </div>
         </div>
-        <div className="fixed bottom-0">
-          <button>Dowload</button>
+        <div className="absolute bottom-0 w-80 flex justify-center pt-7 border-t bg-white">
+          <button className="px-6 py-3 bg-emerald-600 text-white rounded-md relative bottom-3 w-[90%] hover:bg-emerald-900 cursor-pointer">Dowload</button>
         </div>
       </div>
     </>
