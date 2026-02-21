@@ -153,7 +153,7 @@ Soil conditions are optimal for high yield production.
               <Outlet />
             </div>
 
-            <GeneratedDocsPreview document={generatedDoc}/>
+            <GeneratedDocsPreview document={generatedDoc} />
           </div>
         </main>
       </div>
