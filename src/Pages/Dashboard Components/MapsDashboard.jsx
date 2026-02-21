@@ -10,6 +10,7 @@ import {
 import "leaflet/dist/leaflet.css";
 
 function MapsDashboard() {
+
   return (
     <>
       <div className="h-full w-full relative">
