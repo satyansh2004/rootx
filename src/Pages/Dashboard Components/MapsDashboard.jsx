@@ -12,7 +12,6 @@ import { useOutletContext } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-/* Fix default marker icon */
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -32,7 +31,6 @@ function ChangeMapView({ center }) {
   return null;
 }
 
-/* 🔥 Click handler */
 function MapClickHandler({ setMarkerPosition, setIsLoading }) {
   const { setSelectedLocation } = useOutletContext();
   const map = useMapEvents({
@@ -80,7 +78,6 @@ export default function MapsDashboard() {
   const [markerPosition, setMarkerPosition] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  /* 🔥 Ask for user location on first load */
   useEffect(() => {
     if (!navigator.geolocation) return;
 

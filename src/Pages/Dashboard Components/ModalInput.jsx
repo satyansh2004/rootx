@@ -28,7 +28,6 @@ export default function ModalInput({
     });
   };
 
-  // Irrigation Options
   const irrigationOptions = [
     "Rain-fed",
     "Borewell",
@@ -37,7 +36,6 @@ export default function ModalInput({
     "Sprinkler",
   ];
 
-  // Multi-select state
   const toggleIrrigation = (type) => {
     setFormData((prev) => ({
       ...prev,
@@ -67,7 +65,6 @@ export default function ModalInput({
               </button>
             </div>
 
-            {/* Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <div className="h-[60vh] overflow-y-scroll">
                 <div className="flex flex-col gap-2">
@@ -139,7 +136,6 @@ export default function ModalInput({
                   </div>
                 </div>
 
-                {/* Irrigation Type */}
                 <div className="flex flex-col gap-2 mt-5">
                   <label className="font-medium text-gray-700">
                     Irrigation Type

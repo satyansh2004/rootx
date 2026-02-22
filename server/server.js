@@ -21,17 +21,21 @@ app.post("/api/generate-report", async (req, res) => {
     const prompt = `
 Generate a professional AI Agriculture Report.
 
-Farmer Name: ${data.farmerName}
-Location: ${data.region}
-Crop Intent: ${data.cropType}
-Land Size: ${data.landSize}
-Irrigation: ${data.irrigation?.join(", ")}
-Soil pH: ${data.soilPH}
-Moisture: ${data.moisture}
-Temperature: ${data.temperature}
+Location:
+District: ${data.district}
+Country: ${data.country}
+ 
+Crop Mode: ${data.cropMode}
+Specific Crop: ${data.selectedCrop || "AI Recommended"}
+
+Land Size: ${data.landSize} ${data.landSizeUnit}
+Irrigation Types: ${data.irrigation?.join(", ") || "Not specified"}
+
 Risk Appetite: ${data.riskAppetite}
-Local Practices: ${data.localPractice}
-Nutrition Preference: ${data.nutritionPreference}
+Soil Nutrition Preference: ${data.nutritionPreference}
+
+Local Practice:
+${data.localPractice || "None"}
 
 Give:
 - Soil analysis

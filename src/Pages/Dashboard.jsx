@@ -19,8 +19,6 @@ import {
 } from "lucide-react";
 
 import GeneratedDocsPreview from "./Dashboard Components/GeneratedDocsPreview.jsx";
-import MapsDashboard from "./Dashboard Components/MapsDashboard.jsx";
-import History from "./Dashboard Navigations/History.jsx";
 
 import ModalInput from "./Dashboard Components/ModalInput.jsx";
 
@@ -50,43 +48,34 @@ export default function Dashboard() {
     setIsGenerating(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+    const response = await fetch("http://localhost:5000/api/generate-report", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...data,
+        district: selectedLocation.district,
+        country: selectedLocation.country,
+        lat: selectedLocation.lat,
+        lng: selectedLocation.lng,
+      }),
+    });
 
-      const aiResult = `
-Generate a professional AI Agriculture Report.
+    const result = await response.json();
 
-Location:
-District: ${data.district}
-Country: ${data.country}
-
-Crop Mode: ${data.cropMode}
-Specific Crop: ${data.selectedCrop || "AI Recommended"}
-
-Land Size: ${data.landSize} ${data.landSizeUnit}
-Irrigation Types: ${data.irrigation?.join(", ") || "Not specified"}
-
-Risk Appetite: ${data.riskAppetite}
-Soil Nutrition Preference: ${data.nutritionPreference}
-
-Local Practice:
-${data.localPractice || "None"}
-
-Provide:
-- Crop recommendation
-- Yield prediction
-- Fertilizer guidance
-- Irrigation advice
-- Risk analysis
-- Seasonal strategy
-`;
-
-      setGeneratedDoc(aiResult);
-      setIsModalOpen(false);
-    } catch (err) {
-      console.error(err);
+    if (!response.ok) {
+      throw new Error(result.error || "Failed to generate report");
     }
 
-    setIsGenerating(false);
+    setGeneratedDoc(result.report);
+    setIsModalOpen(false);
+  } catch (error) {
+    console.error(error);
+    alert("AI generation failed");
+  }
+
+  setIsGenerating(false);
   };
 
   return (
