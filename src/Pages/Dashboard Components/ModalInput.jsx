@@ -6,30 +6,26 @@ export default function ModalInput({
   onClose,
   onGenerate,
   isGenerating,
+  location,
 }) {
-  const [cropMode, setCropMode] = useState("auto");
-  const [risk, setRisk] = useState("lowRisk");
-  const [selectedCrop, setSelectedCrop] = useState("");
   const [formData, setFormData] = useState({
-    farmerName: "",
-    cropType: "",
-    soilPH: "",
-    moisture: "",
-    temperature: "",
-    region: "",
+    cropMode: "auto",
+    selectedCrop: "",
+    irrigation: [],
+    landSize: "",
+    landSizeUnit: "",
+    riskAppetite: "lowRisk",
+    nutritionPreference: "Let AI Decide",
+    localPractice: "",
   });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-  handleChange;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onGenerate(formData);
+    onGenerate({
+      ...formData,
+      district: location?.district || "",
+      country: location?.country || "",
+    });
   };
 
   // Irrigation Options
@@ -42,15 +38,13 @@ export default function ModalInput({
   ];
 
   // Multi-select state
-  const [selectedIrrigation, setSelectedIrrigation] = useState([]);
-
-  // Toggle function
   const toggleIrrigation = (type) => {
-    setSelectedIrrigation((prev) =>
-      prev.includes(type)
-        ? prev.filter((item) => item !== type)
-        : [...prev, type],
-    );
+    setFormData((prev) => ({
+      ...prev,
+      irrigation: prev.irrigation.includes(type)
+        ? prev.irrigation.filter((item) => item !== type)
+        : [...prev.irrigation, type],
+    }));
   };
   if (!isOpen) return null;
 
@@ -85,17 +79,17 @@ export default function ModalInput({
                         type="text"
                         name="district"
                         readOnly
-                        value="Gorakhpur"
+                        value={location?.district || ""}
                         className="border p-2 rounded border-[#ccc]"
                       />
                     </div>
                     <div className="flex flex-col gap-1">
-                      <label htmlFor="state">State</label>
+                      <label htmlFor="country">Country</label>
                       <input
                         type="text"
-                        name="state"
+                        name="country"
                         readOnly
-                        value="Uttar Pradesh"
+                        value={location?.country || ""}
                         className="border p-2 rounded border-[#ccc]"
                       />
                     </div>
@@ -111,8 +105,8 @@ export default function ModalInput({
                       <input
                         type="radio"
                         value="auto"
-                        checked={cropMode === "auto"}
-                        onChange={() => setCropMode("auto")}
+                        checked={formData.cropMode === "auto"}
+                        onChange={() => setFormData({ ...formData, cropMode: "auto" })}
                       />
                       Let AI Recommend
                     </label>
@@ -122,16 +116,16 @@ export default function ModalInput({
                         <input
                           type="radio"
                           value="specific"
-                          checked={cropMode === "specific"}
-                          onChange={() => setCropMode("specific")}
+                          checked={formData.cropMode === "specific"}
+                          onChange={() => setFormData({ ...formData, cropMode: "specific" })}
                         />
                         I Want Specific Crop
                       </label>
 
-                      {cropMode === "specific" && (
+                      {formData.cropMode === "specific" && (
                         <select
-                          value={selectedCrop}
-                          onChange={(e) => setSelectedCrop(e.target.value)}
+                          value={formData.selectedCrop}
+                          onChange={(e) => setFormData({ ...formData, selectedCrop: e.target.value })}
                           className="border p-2 rounded mt-2"
                         >
                           <option value="">Select Crop</option>
@@ -158,7 +152,7 @@ export default function ModalInput({
                         type="button"
                         onClick={() => toggleIrrigation(type)}
                         className={`px-4 py-2 rounded-full border text-sm transition-all duration-200 ${
-                          selectedIrrigation.includes(type)
+                          formData.irrigation.includes(type)
                             ? "bg-emerald-600 text-white border-emerald-600 scale-105"
                             : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
                         }`}
@@ -176,18 +170,24 @@ export default function ModalInput({
                       type="number"
                       name="landSize"
                       placeholder="eg. 100"
+                      value={formData.landSize}
+                      onChange={(e) => setFormData({ ...formData, landSize: e.target.value })}
                       className="border p-2 rounded border-[#ccc] mr-3"
                     />
                     <select
-                      value={selectedCrop}
-                      onChange={(e) => setSelectedCrop(e.target.value)}
+                      value={formData.landSizeUnit}
+                      onChange={(e) => setFormData({ ...formData, landSizeUnit: e.target.value })}
                       className="border p-2 rounded border-[#ccc]"
                     >
-                      <option value="">Select Crop</option>
-                      <option value="wheat">Wheat</option>
-                      <option value="rice">Rice</option>
-                      <option value="maize">Maize</option>
-                      <option value="sugarcane">Sugarcane</option>
+                      <option value="">Select Land Size</option>
+                      <option value="acre">Acre</option>
+                      <option value="hectare">Hectare</option>
+                      <option value="bigha">Bigha</option>
+                      <option value="gaj">Gaj</option>
+                      <option value="square metre">Square Metre</option>
+                      <option value="square foot">Square Foot</option>
+                      <option value="katha">Katha</option>
+                      <option value="decimal">Decimal</option>
                     </select>
                   </div>
                 </div>
@@ -200,8 +200,8 @@ export default function ModalInput({
                     <input
                       type="radio"
                       value="hightRisk"
-                      checked={risk === "hightRisk"}
-                      onChange={() => setRisk("hightRisk")}
+                      checked={formData.riskAppetite === "hightRisk"}
+                      onChange={() => setFormData({ ...formData, riskAppetite: "hightRisk" })}
                     />
                     High
                   </label>
@@ -209,10 +209,52 @@ export default function ModalInput({
                     <input
                       type="radio"
                       value="lowRisk"
-                      checked={risk === "lowRisk"}
-                      onChange={() => setRisk("lowRisk")}
+                      checked={formData.riskAppetite === "lowRisk"}
+                      onChange={() => setFormData({ ...formData, riskAppetite: "lowRisk" })}
                     />
                     Low
+                  </label>
+                </div>
+
+                <div className="flex flex-col gap-2 mt-5">
+                  <label className="font-medium text-gray-700">
+                    Soil Nutrition Approach
+                  </label>
+                  <label className="flex gap-1">
+                    <input
+                      type="radio"
+                      value="Organic / Natural"
+                      checked={formData.nutritionPreference === "Organic / Natural"}
+                      onChange={() => setFormData({ ...formData, nutritionPreference: "Organic / Natural" })}
+                    />
+                    Organic / Natural
+                  </label>
+                  <label className="flex gap-1">
+                    <input
+                      type="radio"
+                      value="Chemical Fertilizers"
+                      checked={formData.nutritionPreference === "Chemical Fertilizers"}
+                      onChange={() => setFormData({ ...formData, nutritionPreference: "Chemical Fertilizers" })}
+                    />
+                    Chemical Fertilizers
+                  </label>
+                  <label className="flex gap-1">
+                    <input
+                      type="radio"
+                      value="Mixed"
+                      checked={formData.nutritionPreference === "Mixed"}
+                      onChange={() => setFormData({ ...formData, nutritionPreference: "Mixed" })}
+                    />
+                    Mixed
+                  </label>
+                  <label className="flex gap-1">
+                    <input
+                      type="radio"
+                      value="Let AI Decide"
+                      checked={formData.nutritionPreference === "Let AI Decide"}
+                      onChange={() => setFormData({ ...formData, nutritionPreference: "Let AI Decide" })}
+                    />
+                    Let AI Decide
                   </label>
                 </div>
 
@@ -220,17 +262,19 @@ export default function ModalInput({
                   <label className="flex flex-col gap-3 font-semibold">
                     Local Practices (Optional)
                     <textarea
-                      name="localPractises"
+                      name="localPractices"
                       className="border border-[#ccc] rounded-md font-normal p-3 resize-none"
                       placeholder="Example: organic farming, mixed cropping, traditional seed saving"
                       rows={5}
+                      value={formData.localPractice}
+                      onChange={(e) => setFormData({ ...formData, localPractice: e.target.value })}
                     ></textarea>
                   </label>
                 </div>
               </div>
               <button
                 type="submit"
-                disabled={isGenerating}
+                disabled={!location?.lat}
                 className="bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700 cursor-pointer"
               >
                 {isGenerating ? "Generating..." : "Generate Report"}

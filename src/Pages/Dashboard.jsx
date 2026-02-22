@@ -27,6 +27,13 @@ import ModalInput from "./Dashboard Components/ModalInput.jsx";
 export default function Dashboard() {
   const { user } = useAuth();
 
+  const [selectedLocation, setSelectedLocation] = useState({
+    lat: null,
+    lng: null,
+    district: "",
+    country: "",
+  });
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedDoc, setGeneratedDoc] = useState(null);
@@ -36,23 +43,41 @@ export default function Dashboard() {
   };
 
   const handleGenerate = async (data) => {
+    if (!selectedLocation?.lat) {
+      alert("Please select a location on the map before generating.");
+      return;
+    }
     setIsGenerating(true);
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       const aiResult = `
-AI Agriculture Report
+Generate a professional AI Agriculture Report.
 
-Farmer: ${data.farmerName}
-Crop: ${data.cropType}
-Soil pH: ${data.soilPH}
-Moisture: ${data.moisture}%
-Temperature: ${data.temperature}°C
-Region: ${data.region}
+Location:
+District: ${data.district}
+Country: ${data.country}
 
-Recommendation:
-Soil conditions are optimal for high yield production.
+Crop Mode: ${data.cropMode}
+Specific Crop: ${data.selectedCrop || "AI Recommended"}
+
+Land Size: ${data.landSize} ${data.landSizeUnit}
+Irrigation Types: ${data.irrigation?.join(", ") || "Not specified"}
+
+Risk Appetite: ${data.riskAppetite}
+Soil Nutrition Preference: ${data.nutritionPreference}
+
+Local Practice:
+${data.localPractice || "None"}
+
+Provide:
+- Crop recommendation
+- Yield prediction
+- Fertilizer guidance
+- Irrigation advice
+- Risk analysis
+- Seasonal strategy
 `;
 
       setGeneratedDoc(aiResult);
@@ -145,12 +170,13 @@ Soil conditions are optimal for high yield production.
             onClose={() => setIsModalOpen(false)}
             onGenerate={handleGenerate}
             isGenerating={isGenerating}
+            location={selectedLocation}
           />
 
           {/* CONTENT AREA */}
           <div className="flex-1 flex overflow-hidden">
             <div className="flex-1 overflow-auto p-4">
-              <Outlet />
+              <Outlet context={{ selectedLocation, setSelectedLocation }} />
             </div>
 
             <GeneratedDocsPreview document={generatedDoc} />
