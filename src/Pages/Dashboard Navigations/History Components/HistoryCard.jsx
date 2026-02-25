@@ -27,9 +27,6 @@ function HistoryCard() {
             <LucideView />
           </button>
           <button className="cursor-pointer hover:bg-slate-900 p-2 rounded-4xl hover:text-white focus:shadow-lg">
-            <Download />
-          </button>
-          <button className="cursor-pointer hover:bg-slate-900 p-2 rounded-4xl hover:text-white focus:shadow-lg">
             <Trash />
           </button>
         </div>

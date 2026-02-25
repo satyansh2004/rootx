@@ -1,6 +1,8 @@
 import React from "react";
 import SignUp from "./SignUp";
 
+import { Locate, Cloud, BrainCircuit, ShieldAlert } from "lucide-react";
+
 function LandingPage() {
   return (
     <>
@@ -15,12 +17,14 @@ function LandingPage() {
             <a href="#how" className="hover:text-emerald-600 transition">
               How it works
             </a>
-            <a href="#pricing" className="hover:text-emerald-600 transition">
-              Pricing
+            <a href="#problem" className="hover:text-emerald-600 transition">
+              Problem
             </a>
           </div>
 
-          <button className="cursor-pointer bg-emerald-600 text-white px-5 py-2 rounded-4xl hover:bg-emerald-700 transition text-sm font-medium">
+          <button 
+          onClick={() => window.location.href = "/dashboard"}
+          className="cursor-pointer bg-emerald-600 text-white px-5 py-2 rounded-4xl hover:bg-emerald-700 transition text-sm font-medium">
             SignUp
           </button>
         </div>
@@ -43,7 +47,9 @@ function LandingPage() {
             </p>
 
             <div className="mt-8 flex gap-4">
-              <button className="bg-emerald-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-emerald-700 transition">
+              <button 
+              onClick={() => window.location.href = "/dashboard"}
+              className="bg-emerald-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-emerald-700 transition">
                 Get Started
               </button>
 
@@ -62,7 +68,7 @@ function LandingPage() {
 
             <div className="relative bg-white border border-slate-200 rounded-2xl shadow-lg p-4">
               <img
-                src="https://images.klipfolio.com/website/public/bf9c6fbb-06bf-4f1d-88a7-d02b70902bd1/data-dashboard.png"
+                src="./public/image.png"
                 alt="Dashboard Preview"
                 className="rounded-xl"
               />
@@ -71,7 +77,7 @@ function LandingPage() {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-24">
+      <section className="bg-slate-50 py-24" id="problem">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
@@ -178,7 +184,7 @@ function LandingPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-md transition">
               <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-emerald-100 mb-5">
-                {/* icon PLACEHOLDER */}
+                <Locate size={20} className="text-emerald-700" />
               </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">
                 Location-Based Insights
@@ -189,7 +195,9 @@ function LandingPage() {
             </div>
 
             <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-md transition">
-              <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-sky-100 mb-5"></div>
+              <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-sky-100 mb-5">
+                <Cloud size={20} className="text-sky-700" />
+              </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">
                 Weather Integration
               </h3>
@@ -199,7 +207,9 @@ function LandingPage() {
             </div>
 
             <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-md transition">
-              <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-emerald-100 mb-5"></div>
+              <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-emerald-100 mb-5">
+                <BrainCircuit size={20} className="text-emerald-700" />
+              </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">
                 AI-Generated Reports
               </h3>
@@ -209,7 +219,9 @@ function LandingPage() {
             </div>
 
             <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-md transition">
-              <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-sky-100 mb-5"></div>
+              <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-sky-100 mb-5">
+                <ShieldAlert size={20} className="text-sky-700" />
+              </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">
                 Risk-Based Planning
               </h3>
@@ -232,7 +244,9 @@ function LandingPage() {
           </p>
 
           <div className="mt-8">
-            <button className="bg-white text-emerald-600 font-semibold px-8 py-3 rounded-xl hover:bg-slate-100 transition">
+            <button
+            onClick={() => window.location.href = "/dashboard"} 
+            className="bg-white text-emerald-600 font-semibold px-8 py-3 rounded-xl hover:bg-slate-100 transition">
               Create Your First Report
             </button>
           </div>

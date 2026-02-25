@@ -3,6 +3,7 @@ import React from "react";
 import { jsPDF } from "jspdf";
 
 function GeneratedDocsPreview({ document }) {
+  
   const handlePdfDownload = () => {
     const doc = new jsPDF();
 
@@ -16,7 +17,7 @@ function GeneratedDocsPreview({ document }) {
         <h3 className="text-lg font-semibold mb-4">Generated Report</h3>
 
         {document ? (
-          <pre className="whitespace-pre-wrap text-sm">{document}</pre>
+          <pre className="whitespace-pre-wrap text-sm mb-[10vh]">{document}</pre>
         ) : (
           <p className="text-gray-400">No document generated yet.</p>
         )}

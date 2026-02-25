@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  // signInWithPopup,
+  signInWithPopup,
   signInWithEmailAndPassword
 } from "firebase/auth";
 
-import { auth } from "../firebase"
+import { auth, provider } from "../firebase"
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -34,13 +34,13 @@ function SignUp() {
   };
 
   const handleGoogleSignUps = () => {
-    // signInWithPopup(auth, provider)
-    //   .then((result) => {
-    //     console.log(result);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    signInWithPopup(auth, provider)
+      .then(() => {
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <>

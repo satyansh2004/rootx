@@ -29,7 +29,6 @@ function App() {
               </ProtectedRoute>
             }
           >
-            {/* NESTED ROUTES (IMPORTANT) */}
             <Route index element={<MapsDashboard />} />
             <Route path="history" element={<History />} />
             <Route path="charts" element={<Charts />} />
