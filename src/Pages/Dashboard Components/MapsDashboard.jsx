@@ -22,7 +22,6 @@ L.Icon.Default.mergeOptions({
     "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
-/* 🔥 Component to update map center dynamically */
 function ChangeMapView({ center }) {
   const map = useMap();
   useEffect(() => {
