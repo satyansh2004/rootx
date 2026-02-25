@@ -11,6 +11,7 @@ import Dashboard from "./Pages/Dashboard";
 import ProtectedRoute from "./Context/ProtectedRoute";
 import MapsDashboard from "./Pages/Dashboard Components/MapsDashboard";
 import History from "./Pages/Dashboard Navigations/History";
+import Charts from "./Pages/Dashboard Navigations/Charts";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             {/* NESTED ROUTES (IMPORTANT) */}
             <Route index element={<MapsDashboard />} />
             <Route path="history" element={<History />} />
+            <Route path="charts" element={<Charts />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />

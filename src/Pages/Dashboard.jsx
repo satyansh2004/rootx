@@ -11,11 +11,8 @@ import {
   Map as MapIcon,
   LogOut,
   Sprout,
-  Search,
-  Wheat,
-  Droplets,
-  Thermometer,
   HistoryIcon,
+  ChartAreaIcon,
 } from "lucide-react";
 
 import GeneratedDocsPreview from "./Dashboard Components/GeneratedDocsPreview.jsx";
@@ -81,9 +78,8 @@ export default function Dashboard() {
   return (
     <>
       <div className="flex h-screen bg-stone-50 font-sans text-slate-800">
-        {/* SIDEBAR (Always Visible) */}
         <aside className="w-64 bg-emerald-600 text-white flex flex-col shadow-xl">
-          <div className="p-6 flex items-center gap-3 border-b border-emerald-800">
+          <div className="p-4 flex items-center gap-3 border-b border-emerald-800">
             <Sprout className="text-lime-400" size={32} />
             <span className="font-bold text-xl tracking-tight">RootX</span>
           </div>
@@ -95,6 +91,11 @@ export default function Dashboard() {
                 to: "/dashboard/history",
                 icon: <HistoryIcon size={20} />,
                 label: "History",
+              },
+              {
+                to: "/dashboard/charts",
+                icon: <ChartAreaIcon size={20} />,
+                label: "Charts",
               },
             ].map((item) => (
               <NavLink
@@ -124,12 +125,6 @@ export default function Dashboard() {
 
           <div className="p-4 border-t border-emerald-800 flex flex-col gap-3">
             <span>{user?.email}</span>
-            <button
-              className="w-full flex items-center gap-4 px-4 py-3 text-red-300 hover:bg-red-900/90 rounded-lg bg-red-900/60"
-              onClick={handleLogout}
-            >
-              <LogOut size={20} /> Logout
-            </button>
           </div>
         </aside>
 
@@ -141,8 +136,14 @@ export default function Dashboard() {
               RootX Dashboard
             </h2>
 
-            <div className="relative w-96">
-              <Search
+            <div className="relative w-30">
+              <button
+              className="w-full flex items-center gap-4 px-4 py-2 text-red-300 hover:bg-red-900/90 rounded-lg bg-red-900/60"
+              onClick={handleLogout}
+            >
+              <LogOut size={20} /> Logout
+            </button>
+              {/* <Search
                 className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400"
                 size={18}
               />
@@ -150,7 +151,7 @@ export default function Dashboard() {
                 type="text"
                 placeholder="Search farm region..."
                 className="w-full pl-10 pr-4 py-2 bg-stone-100 rounded-full focus:ring-2 focus:ring-emerald-500 outline-none"
-              />
+              /> */}
             </div>
           </header>
 
