@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
 
+import { Loader2 } from "lucide-react";
 export default function ModalInput({
   isOpen,
   onClose,
@@ -19,6 +20,7 @@ export default function ModalInput({
     localPractice: "",
   });
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     onGenerate({
@@ -27,7 +29,7 @@ export default function ModalInput({
       country: location?.country || "",
     });
   };
-
+  
   const irrigationOptions = [
     "Rain-fed",
     "Borewell",
@@ -273,7 +275,14 @@ export default function ModalInput({
                 disabled={!location?.lat}
                 className="bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700 cursor-pointer"
               >
-                {isGenerating ? "Generating..." : "Generate Report"}
+                {isGenerating ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin inline mr-2" />
+                    Generating...
+                  </>
+                ) : (
+                  "Generate Report"
+                )}
               </button>
             </form>
           </div>
