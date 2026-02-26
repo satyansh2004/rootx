@@ -98,7 +98,7 @@ export default function Dashboard() {
         <aside className="w-64 bg-emerald-600 text-white flex flex-col shadow-xl">
           <div className="p-4 flex items-center gap-3 border-b border-emerald-800">
             <Sprout className="text-lime-400" size={32} />
-            <span className="font-bold text-xl tracking-tight">RootX</span>
+            <span className="font-bold text-xl tracking-tight">AI Farming Advisor</span>
           </div>
 
           <nav className="flex-1 mt-6 px-4 space-y-2">
@@ -150,7 +150,7 @@ export default function Dashboard() {
           
           <header className="h-16 bg-white border-b border-stone-200 flex items-center justify-between px-8 shadow-sm">
             <h2 className="text-xl font-semibold text-emerald-900">
-              RootX Dashboard
+              AI Farming Advisor Dashboard
             </h2>
 
             <div className="relative w-30">

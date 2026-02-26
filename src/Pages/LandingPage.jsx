@@ -8,7 +8,7 @@ function LandingPage() {
     <>
       <nav className="bg-white border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="text-xl font-bold text-slate-900">RootX</div>
+          <div className="text-xl font-bold text-slate-900">AI Farming Advisor</div>
 
           <div className="hidden md:flex gap-8 text-slate-600 text-sm">
             <a href="#features" className="hover:text-emerald-600 transition">
@@ -256,7 +256,7 @@ function LandingPage() {
       <footer className="bg-white border-t border-slate-200 py-6">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-slate-500 text-sm">
-            © 2026 RootX. All rights reserved.
+            © 2026 AI Farming Advisor. All rights reserved.
           </p>
 
           {/* <div className="flex gap-6 text-slate-500 text-sm">
