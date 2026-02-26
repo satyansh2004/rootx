@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import OpenAI from "openai";
-import process from 'process';
 
 dotenv.config();
 
@@ -11,7 +10,12 @@ app.use(cors());
 app.use(express.json());
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENROUTER_API_KEY,
+  baseURL: "https://openrouter.ai/api/v1",
+  defaultHeaders: {
+    "HTTP-Referer": "http://localhost:5173", 
+    "X-Title": "RootX Agriculture App", 
+  },
 });
 
 app.post("/api/generate-report", async (req, res) => {
@@ -49,43 +53,18 @@ Make it clean and structured.
 `;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [{ role: "user", content: prompt }],
+      model: "z-ai/glm-4.5-air:free", // ✅ GLM Free Model
+      messages: [
+        { role: "user", content: prompt }
+      ],
     });
-// const response = {
-//   choices: [
-//     {
-//       message: {
-//         content: `AI Agriculture Report (Test Mode)
 
-// Soil Analysis:
-// - Suitable for wheat and rice cultivation.
-
-// Fertilizer Plan:
-// - Use NPK 20-20-20 twice per season.
-
-// Irrigation Plan:
-// - Drip irrigation recommended.
-
-// Risk Assessment:
-// - Medium rainfall risk.
-
-// Expected Yield:
-// - 18–22 quintals per acre.
-
-// Final Recommendation:
-// - Proceed with selected crop.
-//         `
-//       }
-//     }
-//   ]
-// };
     res.json({
       report: response.choices[0].message.content,
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("OpenRouter Error:", error);
     res.status(500).json({ error: "AI generation failed" });
   }
 });
