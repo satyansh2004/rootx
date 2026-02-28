@@ -9,11 +9,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const PORT = process.env.PORT || 5000;
+
 const openai = new OpenAI({
   apiKey: process.env.OPENROUTER_API_KEY,
   baseURL: "https://openrouter.ai/api/v1",
   defaultHeaders: {
-    "HTTP-Referer": "http://localhost:5173", 
+    "HTTP-Referer": process.env.FRONTEND_URL, 
     "X-Title": "AI Farming Advisor", 
   },
 });
@@ -53,7 +55,7 @@ Make it clean and structured.
 `;
 
     const response = await openai.chat.completions.create({
-      model: "z-ai/glm-4.5-air:free", // ✅ GLM Free Model
+      model: "z-ai/glm-4.5-air:free", 
       messages: [
         { role: "user", content: prompt }
       ],
@@ -69,6 +71,6 @@ Make it clean and structured.
   }
 });
 
-app.listen(5000, () => {
-  console.log("Server running on http://localhost:5000");
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
