@@ -52,10 +52,6 @@ function LandingPage() {
               className="bg-emerald-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-emerald-700 transition">
                 Get Started
               </button>
-
-              <button className="border border-slate-300 text-slate-700 px-6 py-3 rounded-xl hover:bg-slate-50 transition">
-                Watch Demo
-              </button>
             </div>
 
             <p className="mt-6 text-sm text-slate-500">
