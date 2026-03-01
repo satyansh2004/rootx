@@ -68,7 +68,7 @@ function LandingPage() {
 
             <div className="relative bg-white border border-slate-200 rounded-2xl shadow-lg p-4">
               <img
-                src="./public/image.png"
+                src="/image.png"
                 alt="Dashboard Preview"
                 className="rounded-xl"
               />
