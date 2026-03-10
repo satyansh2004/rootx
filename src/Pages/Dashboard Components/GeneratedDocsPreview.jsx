@@ -1,7 +1,6 @@
 import React from "react";
 
 import { jsPDF } from "jspdf";
-import { marked } from "marked";
 import ReactMarkdown from "react-markdown";
 import { useRef } from "react"
 
@@ -25,7 +24,7 @@ function GeneratedDocsPreview({ document }) {
 
   return (
     <>
-      <div className="w-90 bg-white border-l border-[#ddd] p-6 overflow-auto">
+      <div className="w-auto md:w-90 bg-white min-h-[40vh] border-l border-[#ddd] md:h-[89vh] p-6 overflow-y-auto overflow-x-hidden relative">
         <h3 className="text-lg font-semibold mb-4">Generated Report</h3>
 
         {document ? (
@@ -35,12 +34,12 @@ function GeneratedDocsPreview({ document }) {
               </ReactMarkdown>
             </pre>
         ) : (
-          <p className="text-gray-400">No document generated yet.</p>
+          <p className="text-gray-400 mb-[10vh] md:mb-0">No generaed docs yet</p>
         )}
-        <div className="absolute bottom-0 w-80 flex justify-center pt-7 border-t border-[#aaa] bg-white">
+        <div className="absolute bottom-0 w-[100%] md:w-80 flex justify-center py-5 border-t border-[#aaa] bg-white">
           <button
             onClick={handlePdfDownload}
-            className="px-6 py-3 bg-emerald-600 text-white rounded-md relative bottom-3 w-[90%] hover:bg-emerald-900 cursor-pointer"
+            className="px-6 py-3 bg-emerald-600 text-white rounded-md w-[90%] hover:bg-emerald-900 cursor-pointer"
           >
             Dowload
           </button>

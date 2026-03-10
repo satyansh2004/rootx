@@ -99,7 +99,7 @@ export default function MapsDashboard() {
   }, [fallbackLocation]);
 
   return (
-    <div className="h-full w-full">
+    <div className="h-[400px] lg:h-full w-full">
       <MapContainer
         center={center}
         zoom={13}
