@@ -12,10 +12,13 @@ app.use(
       "https://aifarmingadvisor.netlify.app",
       "http://localhost:5173",
     ],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
     credentials: true,
   })
 );
+
+app.options("*", cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
